@@ -11,5 +11,5 @@ const text =
   "Hello, my name is Segun David and i am frontend engineer with increasing knowledge in the backend field";
 
 // This dosen't return anything any value except for the new file
-fs.writeFile("/txt/created.txt", text);
-console.log("File New created");
+fs.writeFileSync("./txt/created.txt", text);
+console.log("writing to file is successful");
