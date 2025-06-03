@@ -1,28 +1,48 @@
-// // Reading from a file
+// // // Reading from a file
 
-import fs from "fs";
-// // Es module file system import
+// // Excercise
+// // -> Read from a file
+// // -> Write to a file
+// // -> Async I/O
+// // -> Synchronous I/O
 
-// const myValue = fs.readFileSync("./txt/input.txt", "utf-8");
-// console.log(myValue);
+// import fs from "fs";
+// import { readFile } from "node:fs";
+import { writeFile } from "node:fs";
+import { createServer } from "node:http";
 
-// // writing to a file
-// const text =
-//   "Hello, my name is Segun David and i am frontend engineer with increasing knowledge in the backend field";
+////// FILES
+// const readText = fs.readFileSync("./txt/test.txt", "utf-8");
 
-// // This dosen't return anything any value except for the new file
-// fs.writeFileSync("./txt/created.txt", text);
-// console.log("writing to file is successful");
+// console.log(readText);
 
-// using the readFile Asynchronously to read different files in the background
-fs.readFile("./txt/created.txt", "utf-8", (err, data) => {
-  if (err) return console.log("Error ❌");
-  console.log(data);
+// // write to file synchronously
+// const data = "Hi my name is David Olasunkanmi Segun";
+// fs.writeFileSync("./txt/test.txt", data, "utf-8");
+
+// // reading and writing files asynchronously in javascript
+// // this is the best way of working with I/O operations in node js
+
+// readFile("./txt/test.txt", "utf-8", (err, data) => {
+//   if (err) console.log("Error reading file!");
+//   console.log(data);
+// });
+
+// writeFile(
+//   "./txt/test.txt",
+//   "Hello world, I am learning node JS",
+//   "utf-8",
+//   (err) => {
+//     if (err) console.log("error writing to file!");
+//   }
+// );
+
+////// SERVER
+// Sending back a plain text response if a response comes in
+const server = createServer((req, res) => {
+  res.end("Hello from the server🚀");
 });
 
-const values = "lorem lorem lorem lorem lorem lorem lorem ipsum ipsum dolor";
-
-fs.writeFile("./txt/start.txt", `${values}`, "utf-8", (err) => {
-  console.log("your file has been written!");
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listening to server...");
 });
-console.log("reading file....");
