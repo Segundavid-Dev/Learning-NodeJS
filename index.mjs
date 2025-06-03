@@ -9,6 +9,7 @@
 // import fs from "fs";
 // import { readFile } from "node:fs";
 import { writeFile } from "node:fs";
+import { readFile } from "node:fs";
 import { createServer } from "node:http";
 import { URL } from "node:url";
 
@@ -42,15 +43,23 @@ import { URL } from "node:url";
 // Sending back a plain text response if a response comes in
 const server = createServer((req, res) => {
   const pathName = req.url;
-  if (pathName === "/" || pathName === "overview") {
-    // send soething to the client
-    res.end("This is the OVERVIEW");
-  } else if (pathName === "product") {
-    res.end("This is the PRODUCT");
+  if (pathName === "/" || pathName === "/overview") {
+    res.end("This is the overview route");
+  } else if (pathName === "/product") {
+    res.end("This is the products page");
+  } else if (pathName === "/api") {
+    // enter the route and read the file in here
+    readFile(`./dev-data/data.json`, "utf-8", (err, data) => {
+      const productData = JSON.parse(data);
+      res.writeHead(200, {
+        "content-type": "application/json",
+      });
+      console.log(productData);
+    });
+    res.end("api");
   } else {
-    res.end("Page not found!");
+    res.end("Page not Found");
   }
-  res.end("Hello from the server🚀");
 });
 
 server.listen(8000, "127.0.0.1", () => {
