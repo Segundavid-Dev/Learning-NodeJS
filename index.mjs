@@ -10,6 +10,7 @@
 // import { readFile } from "node:fs";
 import { writeFile } from "node:fs";
 import { createServer } from "node:http";
+import { URL } from "node:url";
 
 ////// FILES
 // const readText = fs.readFileSync("./txt/test.txt", "utf-8");
@@ -40,6 +41,15 @@ import { createServer } from "node:http";
 ////// SERVER
 // Sending back a plain text response if a response comes in
 const server = createServer((req, res) => {
+  const pathName = req.url;
+  if (pathName === "/" || pathName === "overview") {
+    // send soething to the client
+    res.end("This is the OVERVIEW");
+  } else if (pathName === "product") {
+    res.end("This is the PRODUCT");
+  } else {
+    res.end("Page not found!");
+  }
   res.end("Hello from the server🚀");
 });
 
