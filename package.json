@@ -1,0 +1,23 @@
+{
+  "name": "node-js",
+  "version": "1.0.0",
+  "description": "Learning node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Segundavid-Dev/Learning-NodeJS.git"
+  },
+  "keywords": [
+    "David",
+    "Segun"
+  ],
+  "author": "David Segun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Segundavid-Dev/Learning-NodeJS/issues"
+  },
+  "homepage": "https://github.com/Segundavid-Dev/Learning-NodeJS#readme"
+}
