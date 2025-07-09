@@ -7,6 +7,8 @@ import { createServer } from "node:http";
 import { url } from "node:inspector";
 import { url } from "node:inspector/promises";
 
+import slugify from "slugify";
+
 readFile("./txt/test.txt", "utf-8", (err, data) => {
   console.log(data);
 });
