@@ -6,6 +6,8 @@
 import { readFile } from "node:fs";
 import { writeFile } from "node:fs";
 
+// simulate the cjs module system for my mjs module
+
 readFile("./dog.txt", "utf-8", (err, data) => {
   if (err) console.log("wrong file path");
   const fetchData = async () => {
@@ -18,8 +20,14 @@ readFile("./dog.txt", "utf-8", (err, data) => {
       const res = await req.json();
       // log image url
       const imageUrl = res.message;
-      writeFile("./dogBreed.txt", imageUrl, "utf-8", (err) => {
-        if (err) console.log("error in writing file");
+
+      // // use the writeFilePro promisified function here
+      // writeFile("./dogBreed.txt", imageUrl, "utf-8", (err) => {
+      //   if (err) console.log("error in writing file");
+      // });
+
+      return writeFilePro(`./dog.txt`, imageUrl).then(() => {
+        console.log("Dog image resolved successfully");
       });
 
       // Save the image url to text file
@@ -29,3 +37,24 @@ readFile("./dog.txt", "utf-8", (err, data) => {
   };
   fetchData();
 });
+
+// Promises instead of callback function
+const readFilePro = (file) => {
+  return new Promise((resolve, reject) => {
+    readFile(file, "utf-8", (err, data) => {
+      // resolve and reject comes in play here
+      if (err) reject("Could not find the file");
+      resolve(data); // whatever value we pass into the resolve function is what will be available later on
+    });
+  });
+};
+
+// use this promisify function in the
+const writeFilePro = (file, text) => {
+  return new Promise((resolve, reject) => {
+    writeFile(file, text, "utf-8", (err) => {
+      if (err) reject("could not write to file");
+      resolve("success");
+    });
+  });
+};
